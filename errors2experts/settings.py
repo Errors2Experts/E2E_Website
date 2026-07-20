@@ -118,4 +118,4 @@ STORAGES = {
 }    
 
 # Fix for django-cloudinary-storage compatibility with Django 5+
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
