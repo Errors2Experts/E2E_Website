@@ -39,7 +39,7 @@
             </div>
             <div class="browser-screen-view">
               {% if service.image %}
-                <img src="{{ service.image.url }}" class="img-fluid project-display-img" alt="{{ service.title }}">
+                <img src="{{ service.image }}" class="img-fluid project-display-img" alt="{{ service.title }}">
               {% else %}
                 <img src="{% static 'main/images/no-image.png' %}" class="img-fluid project-display-img" alt="Default Image"> 
               {% endif %}
@@ -110,7 +110,7 @@
         <div class="ld-mini-card">
           <div class="ld-mini-img">
             {% if demo.image %}
-              <img src="{{ demo.image.url }}" alt="{{ demo.title }}" loading="lazy">
+              <img src="{{ demo.image }}" alt="{{ demo.title }}" loading="lazy">
             {% else %}
               <img src="{% static 'images/default-service.jpg' %}" alt="{{ demo.title }}" loading="lazy">
             {% endif %}
@@ -118,10 +118,10 @@
           <div class="ld-mini-body">
             <h4>{{ demo.title }}</h4>
             {% if demo.description %}<p>{{ demo.description }}</p>{% endif %}
-            {% if demo.url %}
-            <a href="{{ demo.url }}" target="_blank" rel="noopener noreferrer" class="ld-mini-cta">Visit Live Site →</a>
+            {% if demo %}
+            <a href="{{ demo }}" target="_blank" rel="noopener noreferrer" class="ld-mini-cta">Visit Live Site →</a>
             {% elif demo.image %}
-            <a href="{{ demo.image.url }}" target="_blank" class="ld-mini-cta">View Sample ↓</a>
+            <a href="{{ demo.image }}" target="_blank" class="ld-mini-cta">View Sample ↓</a>
             {% endif %}
           </div>
         </div>

@@ -1,4 +1,5 @@
 from django.db import models
+from main.utils import upload_image_to_imgbb
 
 class Course(models.Model):
     title = models.CharField(max_length=200)
@@ -6,13 +7,18 @@ class Course(models.Model):
     duration = models.CharField(max_length=100)
     price = models.IntegerField()
     discount=models.CharField(max_length=100)
-    image = models.ImageField(upload_to='course_images/', blank=True, null=True)
+    image = models.CharField(max_length=500,blank=True, null=True)
 
     def __str__(self):
         return self.title
     
-
-
+    def save(self, *args, **kwargs):
+        if hasattr(self.image, 'read'):
+            url = upload_image_to_imgbb(self.image)
+            if url:
+                self.image = url
+        super().save(*args, **kwargs)
+    
 class Placement(models.Model):
     student_name = models.CharField(max_length=100)
     student_image = models.ImageField(upload_to='placements/')
@@ -43,7 +49,7 @@ class Module(models.Model):
 class Service(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    image = models.ImageField(upload_to='course_images/', blank=True, null=True)
+    image = models.CharField(max_length=500, blank=True, null=True)
     technologies = models.CharField(
         max_length=400,
         blank=True,
@@ -52,6 +58,13 @@ class Service(models.Model):
  
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        if hasattr(self.image, 'read'):
+            url = upload_image_to_imgbb(self.image)
+            if url:
+                self.image = url
+        super().save(*args, **kwargs)
  
     def tech_list(self):
         """Returns technologies as a clean list for templates: service.tech_list"""
@@ -67,7 +80,7 @@ class ServiceDemoLink(models.Model):
         max_length=150,
         help_text="e.g. 'E-commerce Demo', 'Portfolio Demo'"
     )
-    image = models.FileField(upload_to='service_images/', blank=True, null=True)
+    image = models.CharField(max_length=500, blank=True, null=True)
     url = models.URLField(help_text="Full link to the live demo site",blank=True, null=True)
     order = models.PositiveIntegerField(default=0, help_text="Lower number = shown first")
     description = models.CharField(
@@ -92,6 +105,13 @@ class ServiceDemoLink(models.Model):
  
     def __str__(self):
         return f"{self.service.title} — {self.title}"
+    
+    def save(self, *args, **kwargs):
+        if hasattr(self.image, 'read'):
+            url = upload_image_to_imgbb(self.image)
+            if url:
+                self.image = url
+        super().save(*args, **kwargs)
     
     def tech_list(self):
         return [t.strip() for t in self.technologies.split(',') if t.strip()]
@@ -142,6 +162,7 @@ class ProcessStep(models.Model):
 
     def __str__(self):
         return self.title
+    
 class Contact(models.Model):
     name = models.CharField(max_length=150)
     email = models.EmailField()
@@ -155,10 +176,17 @@ class ClientProject(models.Model):
     project_type = models.CharField(max_length=150)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='course_images/', blank=True, null=True)
+    image = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return f"{self.client_name} - {self.project_type}"
+    
+    def save(self, *args, **kwargs):
+        if hasattr(self.image, 'read'):
+            url = upload_image_to_imgbb(self.image)
+            if url:
+                self.image = url
+        super().save(*args, **kwargs)
 
 
 # Students Reviews Model
@@ -169,14 +197,20 @@ class StudentReview(models.Model):
     review_text = models.TextField()
     rating = models.PositiveIntegerField(default=5) 
     created_at = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='reviews/', blank=True, null=True)
+    image = models.CharField(max_length=500, blank=True, null=True)
     gender = models.CharField(max_length=1,choices=GENDER_CHOICES,default='M',help_text="Used for default anime avatar if no custom image is uploaded")
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return f"{self.student_name} - {self.course_name}"
     
-from django.db import models
+    def save(self, *args, **kwargs):
+        if hasattr(self.image, 'read'):
+            url = upload_image_to_imgbb(self.image)
+            if url:
+                self.image = url
+        super().save(*args, **kwargs)
+    
 
 class Career(models.Model):
 
@@ -191,12 +225,19 @@ class Career(models.Model):
     job_description = models.TextField()
     employment_type = models.CharField(max_length=50, choices=EMPLOYMENT_TYPES)
     salary = models.CharField(max_length=100, blank=True, null=True)
-    image = models.ImageField(upload_to='careers/', blank=True, null=True)
+    image = models.CharField(max_length=500, blank=True, null=True)
     posted_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.role
     
+    def save(self, *args, **kwargs):
+        if hasattr(self.image, 'read'):
+            url = upload_image_to_imgbb(self.image)
+            if url:
+                self.image = url
+        super().save(*args, **kwargs)
+
 class JobApplication(models.Model):
     career = models.ForeignKey('Career', on_delete=models.CASCADE)
     full_name = models.CharField(max_length=200)
@@ -249,7 +290,7 @@ class WorkshopPhoto(models.Model):
     """
     title       = models.CharField(max_length=200, help_text="e.g. 'Python Bootcamp – March 2025'")
     description = models.TextField(blank=True, help_text="Short caption shown under the photo (optional)")
-    image       = models.ImageField(upload_to='workshop_photos/', help_text="Upload workshop photo")
+    image       = models.CharField(max_length=500, help_text="Upload workshop photo")
     event_date  = models.DateField(blank=True, null=True, help_text="Date the workshop was held (optional)")
     order       = models.PositiveIntegerField(default=0, help_text="Lower number = shown first")
     created_at  = models.DateTimeField(auto_now_add=True)
@@ -261,6 +302,13 @@ class WorkshopPhoto(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        if hasattr(self.image, 'read'):
+            url = upload_image_to_imgbb(self.image)
+            if url:
+                self.image = url
+        super().save(*args, **kwargs)
 
 class WorkshopRegistration(models.Model):
     full_name = models.CharField(max_length=150)
@@ -304,7 +352,7 @@ class Certificate(models.Model):
 
     cert_type   = models.CharField(max_length=20, choices=CERT_TYPES, default='course', verbose_name='Certificate Type')
     course_name = models.CharField(max_length=200, help_text="e.g. 'Python Full Stack Development'")
-    image       = models.ImageField(upload_to='certificates/', help_text="Upload certificate image/scan")
+    image       = models.CharField(max_length=500, help_text="Upload certificate image/scan")
     description = models.TextField(blank=True, help_text="Optional tagline shown under the certificate")
     order       = models.PositiveIntegerField(default=0, help_text="Lower number = shown first")
     created_at  = models.DateTimeField(auto_now_add=True)
@@ -316,8 +364,13 @@ class Certificate(models.Model):
 
     def __str__(self):
         return f"{self.course_name} ({self.get_cert_type_display()})"
-
-from django.db import models
+    
+    def save(self, *args, **kwargs):
+        if hasattr(self.image, 'read'):
+            url = upload_image_to_imgbb(self.image)
+            if url:
+                self.image = url
+        super().save(*args, **kwargs)
 
 class Internship(models.Model):
     title = models.CharField(max_length=200)
@@ -329,25 +382,36 @@ class Internship(models.Model):
 
 
     # Image Field
-    image = models.ImageField(upload_to='internships/', blank=True, null=True)
+    image = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        if hasattr(self.image, 'read'):
+            url = upload_image_to_imgbb(self.image)
+            if url:
+                self.image = url
+        super().save(*args, **kwargs)
     from django.db import models
 
 class SiteOffer(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    image = models.ImageField(upload_to='site_offers/', blank=True, null=True)
+    image = models.CharField(max_length=500, blank=True, null=True)
     link_url = models.CharField(max_length=200, help_text="e.g., /internships/")
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
-
-
-from django.db import models
+    
+    def save(self, *args, **kwargs):
+        if hasattr(self.image, 'read'):
+            url = upload_image_to_imgbb(self.image)
+            if url:
+                self.image = url
+        super().save(*args, **kwargs)
 
 
 class DemoCategory(models.Model):

@@ -28,7 +28,7 @@
       <div class="svc-card">
         <div class="svc-img">
           {% if service.image %}
-            <img src="{{ service.image.url }}" alt="{{ service.title }}">
+            <img src="{{ service.image }}" alt="{{ service.title }}">
           {% else %}
             <img src="{% static 'images/default-service.jpg' %}" alt="Service">
           {% endif %}

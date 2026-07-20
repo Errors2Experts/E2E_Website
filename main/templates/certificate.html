@@ -35,11 +35,11 @@
     {% for cert in certificates %}
     <div class="cert-item reveal-scale" data-type="{{ cert.cert_type }}" role="listitem">
       <div class="cert-card"
-           onclick="openCertLightbox('{{ cert.image.url }}', '{{ cert.course_name|escapejs }}', '{{ cert.get_cert_type_display|escapejs }}', '{{ cert.description|escapejs }}')">
+           onclick="openCertLightbox('{{ cert.image }}', '{{ cert.course_name|escapejs }}', '{{ cert.get_cert_type_display|escapejs }}', '{{ cert.description|escapejs }}')">
 
         <!-- Certificate image with gold frame -->
         <div class="cert-img-wrap">
-          <img src="{{ cert.image.url }}"
+          <img src="{{ cert.image }}"
                alt="Certificate — {{ cert.course_name }}"
                loading="lazy">
           <div class="cert-overlay">

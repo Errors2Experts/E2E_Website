@@ -175,7 +175,7 @@
         <article class="course-card">
 
             {% if course.image %}
-            <img src="{{ course.image.url }}" alt="{{ course.title }}">
+            <img src="{{ course.image }}" alt="{{ course.title }}">
             {% else %}
             <img src="{% static 'main/images/no-image.png' %}" alt="No Image">
             {% endif %}
@@ -241,7 +241,7 @@
       <div class="svc-card">
         <div class="svc-img">
           {% if service.image %}
-            <img src="{{ service.image.url }}" alt="{{ service.title }}">
+            <img src="{{ service.image }}" alt="{{ service.title }}">
           {% else %}
             <img src="{% static 'images/default-service.jpg' %}" alt="Service">
           {% endif %}
@@ -541,7 +541,7 @@
                 </div>
                 <div class="browser-screen-view">
                   {% if project.image %}
-                    <img src="{{ project.image.url }}" class="img-fluid project-display-img" alt="{{ project.title }} Interface View">
+                    <img src="{{ project.image }}" class="img-fluid project-display-img" alt="{{ project.title }} Interface View">
                   {% else %}
                     <div class="project-placeholder-view">Preview Loading...</div>
                   {% endif %}
@@ -606,7 +606,7 @@
     <div class="upcoming-workshop">
 
         <div class="upcoming-image">
-            <img src="{{ upcoming_workshop.image.url }}" alt="{{ upcoming_workshop.title }}">
+            <img src="{{ upcoming_workshop.image }}" alt="{{ upcoming_workshop.title }}">
         </div>
 
         <div class="upcoming-content">
@@ -640,7 +640,7 @@
          class="ws-preview-item reveal-scale"
          aria-label="{{ photo.title }}">
         <div class="ws-preview-img">
-          <img src="{{ photo.image.url }}" alt="{{ photo.title }}" loading="lazy">
+          <img src="{{ photo.image }}" alt="{{ photo.title }}" loading="lazy">
           <div class="ws-preview-overlay">
             <span style="font-size:20px">🔍</span>
             <span class="zoom-label">View Photo</span>
@@ -863,7 +863,7 @@
       <div class="intern-home-card reveal-scale">
         <div class="intern-home-card-top">
            {% if internship.image %}
-         <img src="{{ internship.image.url }}" alt="{{ internship.title }}">
+         <img src="{{ internship.image }}" alt="{{ internship.title }}">
           {% else %}
          <img src="{% static 'images/default-course.jpg' %}" alt="Default Image">
           {% endif %}
@@ -917,7 +917,7 @@
       <article class="review-card">
         <div class="review-img">
           {% if r.image %}
-            <img src="{{ r.image.url }}" alt="{{ r.student_name }}" loading="lazy">
+            <img src="{{ r.image }}" alt="{{ r.student_name }}" loading="lazy">
           {% else %}
             {% if r.gender == 'F' %}
             <img src="{% static 'images/default_girl_placeholder.jpeg' %}" alt="{{ r.student_name }}" loading="lazy">
@@ -938,7 +938,7 @@
       {% for r in reviews %}
       <article class="review-card" aria-hidden="true">
         <div class="review-img">
-          {% if r.image %}<img src="{{ r.image.url }}" alt="" loading="lazy">
+          {% if r.image %}<img src="{{ r.image }}" alt="" loading="lazy">
           {% if r.gender == 'F' %}
         <img src="{% static 'images/default_girl_placeholder.jpeg' %}" alt="{{ r.student_name }}" loading="lazy">
       {% else %}
@@ -989,7 +989,7 @@
         <div class="cert-preview-card reveal-scale">
           <!-- Gold frame image -->
           <div style="border:3px solid var(--e2e-gold);border-radius:var(--radius-md);padding:4px;background:var(--e2e-gold-bg);margin-bottom:14px;height:180px;overflow:hidden">
-            <img src="{{ cert.image.url }}"
+            <img src="{{ cert.image }}"
                  alt="{{ cert.course_name }}"
                  loading="lazy"
                  style="width:100%;height:100%;object-fit:cover;border-radius:10px;display:block">

@@ -24,7 +24,7 @@
       <div class="intern-card">
         <div class="intern-card-top">
           {% if internship.image %}
-         <img src="{{ internship.image.url }}" alt="{{ internship.title }}">
+         <img src="{{ internship.image }}" alt="{{ internship.title }}">
           {% else %}
          <img src="{% static 'images/default-course.jpg' %}" alt="Default Image">
           {% endif %}

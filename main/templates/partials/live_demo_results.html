@@ -5,7 +5,7 @@
   <div class="ld-card reveal-scale visible">
     <div class="ld-img-wrap">
       {% if demo.image %}
-        <img src="{{ demo.image.url }}" alt="{{ demo.title }}" loading="lazy">
+        <img src="{{ demo.image }}" alt="{{ demo.title }}" loading="lazy">
       {% else %}
         <img src="{% static 'images/default-service.jpg' %}" alt="{{ demo.title }}" loading="lazy">
       {% endif %}
@@ -20,8 +20,8 @@
       <p>{{ demo.description }}</p>
       {% endif %}
       <div class="ld-cta-row">
-        {% if demo.url %}
-        <a href="{{ demo.url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary px-4 py-2" style="text-decoration:none">
+        {% if demo %}
+        <a href="{{ demo }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary px-4 py-2" style="text-decoration:none">
           Live Demo <span>→</span>
         </a>
         {% endif %}

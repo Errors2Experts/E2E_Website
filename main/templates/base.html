@@ -167,7 +167,7 @@
         <!-- ══════════ ACTIVE OFFER STATE ══════════ -->
         <div class="e2e-offer-banner {% if not active_offer.image %}e2e-offer-banner--noimg{% endif %}">
           {% if active_offer.image %}
-            <img src="{{ active_offer.image.url }}" alt="{{ active_offer.title }}" class="e2e-offer-img">
+            <img src="{{ active_offer.image }}" alt="{{ active_offer.title }}" class="e2e-offer-img">
             <div class="e2e-offer-img-fade"></div>
           {% endif %}
           <span class="e2e-offer-ribbon">🔥 Limited-Time Offer</span>

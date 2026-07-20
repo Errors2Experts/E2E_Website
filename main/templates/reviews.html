@@ -15,7 +15,7 @@
 <article class="review-card">
   <div class="review-img">
     {% if r.image %}
-      <img src="{{ r.image.url }}" alt="{{ r.student_name }}" loading="lazy">
+      <img src="{{ r.image }}" alt="{{ r.student_name }}" loading="lazy">
     {% else %}
       {% if r.gender == 'F' %}
         <img src="{% static 'images/girl_placeholder.jpeg' %}" alt="{{ r.student_name }}" loading="lazy">
@@ -37,7 +37,7 @@
 <article class="review-card" aria-hidden="true">
   <div class="review-img">
     {% if r.image %}
-      <img src="{{ r.image.url }}" alt="" loading="lazy">
+      <img src="{{ r.image }}" alt="" loading="lazy">
     {% else %}
       {% if r.gender == 'F' %}
         <img src="{% static 'images/girl_placeholder.jpeg' %}" alt="" loading="lazy">

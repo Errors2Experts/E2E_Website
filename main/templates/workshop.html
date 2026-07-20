@@ -20,7 +20,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     <div class="upcoming-workshop">
 
         <div class="upcoming-image">
-            <img src="{{ upcoming_workshop.image.url }}" alt="{{ upcoming_workshop.title }}">
+            <img src="{{ upcoming_workshop.image }}" alt="{{ upcoming_workshop.title }}">
         </div>
         
         <div class="upcoming-content">
@@ -56,8 +56,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     {% for photo in workshops %}
     <div class="workshop-item reveal-scale" role="listitem">
       <div class="workshop-card">
-        <div class="workshop-img-wrap" onclick="openLightbox('{{ photo.image.url }}', '{{ photo.title|escapejs }}', '{{ photo.description|escapejs }}')">
-          <img src="{{ photo.image.url }}"
+        <div class="workshop-img-wrap" onclick="openLightbox('{{ photo.image }}', '{{ photo.title|escapejs }}', '{{ photo.description|escapejs }}')">
+          <img src="{{ photo.image }}"
                alt="{{ photo.title }}"
                loading="lazy">
           <!-- Hover overlay -->
@@ -600,7 +600,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 (function(){
   var photos = [
     {% for photo in workshops %}
-    { src: "{{ photo.image.url }}", title: "{{ photo.title|escapejs }}", desc: "{{ photo.description|escapejs }}" }{% if not forloop.last %},{% endif %}
+    { src: "{{ photo.image }}", title: "{{ photo.title|escapejs }}", desc: "{{ photo.description|escapejs }}" }{% if not forloop.last %},{% endif %}
     {% endfor %}
   ];
   var lb      = document.getElementById('ws-lightbox');

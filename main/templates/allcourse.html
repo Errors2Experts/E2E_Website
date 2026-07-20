@@ -21,7 +21,7 @@
     <article class="course-card">
 
       {% if course.image %}
-        <img src="{{ course.image.url }}" alt="{{ course.title }}">
+        <img src="{{ course.image }}" alt="{{ course.title }}">
       {% else %}
         <img src="{% static 'main/images/no-image.png' %}" alt="No Image">
       {% endif %}
